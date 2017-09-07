@@ -1,0 +1,111 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+\title{Theory of Recursed}
+\author{Jimin Park}
+\maketitle
+
+In this article, various aspects of Recursed are described, including mechanics,
+gadgets, and theorical analysis of it.
+
+This article is aimed towards people trying to make a custom Recursed puzzle,
+or people who are interested in theorical side of Recursed.
+
+If the reader of this article haven't see the ending of Recursed, then one is advised against continue reading this article,
+as this article contains many strategies of Recursed where discovering them is a big fun part of the game.
+
+\tableofcontents
+
+\section{Introduction}
+Recursed is a puzzle game released in 2016, developed by Portponky.
+The main objective of a Recursed puzzle is to reach to a destination using various game elements.
+
+\subsection{Game Elements}
+
+\subsubsection{Room}
+A \emph{room} is a rectangular area with tiles and various items in it.
+The size of a room is $20\times15$, where there are 20 tiles horizontally and 15 tiles vertically.
+
+There can be items (which will be described later) in a room, and there is no (logical) limit how many items
+can be in a room.
+
+A player can't go outside of a room. The left, right, or top edge of a room is blocked by an invisible barrier,
+which prevents the player from escaping. However, any item can go past the invisible barrier (by throwing or using a fan).
+Items gone beyond the left or the right edge will be missed, but items went beyond the top edge will be there, which can be
+retrieved after removing the fan.
+
+When the player reaches the bottom edge of the room, the player will bounce.
+However, this behavior is \emph{not} used to solve any of the puzzles in the game,
+as it is impossible\footnote{Actually, it is possible to do in Dump.} to do.
+\subsubsection{Crystal and Diamond}
+A \emph{crystal} is a fixed item in a room, marking a destination of a puzzle. If a player
+collects a crystal, the player will exit the puzzle and it will be marked as crystal-solved.
+
+A \emph{diamond} appears in a paradox room, which can be entered after a player invokes a paradox.
+When a diamond is collected, the player will exit the puzzle and it will be marked as diamond-solved.
+
+After invoking a paradox, a crystal will be unable to be collected. When a player attemps to eat a crystal
+after invoking a paradox, the crystal will simply disappear when touched.\footnote{This behavior was introduced
+by the developer to prevent players from getting crystal easily with fans obtained from a paradox room.}
+\subsubsection{Throw}
+\subsubsection{Block}
+\subsubsection{Keys and Door}
+\subsubsection{Chest}
+\subsubsection{Green Objects}
+\subsubsection{Water and Acid}
+\subsubsection{Paradox}
+A \emph{paradox} can be happen with green chests.
+\subsubsection{Jar}
+\subsubsection{Fan}
+\subsubsection{Oobleck}
+\subsubsection{Glitch}
+\subsubsection{Other Items}
+
+\subsection{Tiles}
+\subsubsection{Empty}
+\subsubsection{Solid}
+\subsubsection{Ledge}
+\subsubsection{Water and Acid}
+
+\section{Game Mechanisms}
+\subsection{Ways of Invoking a Paradox}
+
+\section{Complexity of Recursed}
+There haven't much research on algorithms to solve a Recursed map, or how complex such an algorithm would be.
+\begin{definition}
+The \emph{Standard Recursed Decision Problem}, or the \emph{Standard RDP} for short, is the problem of deteriming
+whether a puzzle $P$ is solvable, where $P$ is given as list of rooms $\{r_1, r_2, \cdots, r_n\}$.
+Here, the size of a room $r_i$ is fixed to be $20 \times 15$, and the number of items in a room $r_i$ is bounded by
+$300$, the amount of tiles in a room.
+\end{definition}
+Therefore, the length of the input for the Standard RDP can be represented in $\tilde{\Theta}(n)$ in terms of the amount
+of rooms $n$, for any proper encoding (where additional $\log n$ terms might appear due to specify room \#).
+
+There are several interesting sub-problems of the Standard RDP.
+\begin{definition}
+The \emph{Pure Recursed Decision Problem}, or the \emph{Pure RDP}, is a subset of the Standard RDP,
+where all objects are locks, keys, crystals, blocks, chests, and fissures, and none of them is green. (There may be water in a room.)
+\end{definition}
+In any instance of the Pure RDP, any chest is a pure function, so for any item, going into the chest with the item
+results in same action.
+
+\begin{definition}
+The \emph{Simple Recursed Decision Problem}, or the \emph{Simple RDP}, is a subset of the Pure RDP,
+where no fissures present in any of the rooms.
+\end{definition}
+In any instance of the Simple RDP, there is an upper bound (depending on $n$) of number of items in a room
+in any step of a solution.
+
+\subsection{Gadgets}
+\subsection{Reduction from 3-SAT}
+
+\section{Recursed Solver}
+Currently, there is no available automatic Recursed solver. And this would be impossible to do if the Standard RDP turned out to be in Turing-complete.
+However, various heuristics might be used to check the solvability of a puzzle. For example, if there's no reference
+to a chest with a key, then it is certain that the puzzle can't be solved, and this was used to spawn crows in the game.
+
+\end{document}
