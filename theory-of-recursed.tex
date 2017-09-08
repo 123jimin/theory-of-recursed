@@ -1,7 +1,6 @@
 \documentclass[a4paper]{article}
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 
-\theoremstyle{theorem}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
 
@@ -78,6 +77,7 @@ A \emph{paradox} can be happen with green chests.
 \section{Complexity of Recursed}
 There haven't much research on algorithms to solve a Recursed map, or how complex such an algorithm would be.
 
+\subsection{Definitions}
 First, let's introduce a proper decision problem based on the puzzle of Recursed.
 \begin{definition}
 The \emph{Standard Recursed Decision Problem}, or the \emph{Standard RDP} for short, is the problem of deteriming
@@ -98,7 +98,7 @@ In any instance of the Pure RDP, any chest is a pure function. So, for any item 
 The \emph{Simple Recursed Decision Problem}, or the \emph{Simple RDP}, is a subset of the Pure RDP where no fissures present in any of the rooms.
 \end{definition}
 
-It will be shown that the maximum number of items in a room in any step of a good solution can be bounded by a polynomial function of $n$.
+\subsection{Simple RDP $\in$ PSPACE}
 \begin{lemma}
 There is a fixed polynomial function $p(n)$, such that in any instance $P$ of the Simple RDP, if there's a solution to $P$,
 then there will be a solution to $P$ such that the maximum number of items in a room in any step of the solution is bounded by $p(n)$,
@@ -115,8 +115,10 @@ where $n$ is the amount of rooms in $P$.
 The Simple RDP is in PSPACE.
 \end{theorem}
 
-\subsection{Gadgets}
-\subsection{Reduction from 3-SAT}
+\subsection{Standard RDP $\in$ NP-Hard}
+\begin{theorem}
+There is a reduction from 3-SAT to the Standard RDP.
+\end{theorem}
 
 \section{Recursed Solver}
 Currently, there is no available automatic Recursed solver. And this would be impossible to do if the Standard RDP turned out to be in Turing-complete.
