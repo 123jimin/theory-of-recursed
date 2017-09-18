@@ -3,6 +3,7 @@
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -25,7 +26,6 @@ Recursed is a puzzle game released in 2016, developed by Portponky.
 The main objective of a Recursed puzzle is to reach to a destination using various game elements.
 
 \subsection{Game Elements}
-
 \subsubsection{Room}
 A \emph{room} is a rectangular area with tiles and various items in it.
 The size of a room is $20\times15$, where there are 20 tiles horizontally and 15 tiles vertically.
@@ -51,28 +51,68 @@ When a diamond is collected, the player will exit the puzzle and it will be mark
 After invoking a paradox, a crystal will be unable to be collected. When a player attemps to collect a crystal
 after invoking a paradox, the crystal will simply disappear when touched.\footnote{This behavior was introduced
 by the developer to prevent players from getting crystal easily with fans obtained from a paradox room.}
-\subsubsection{Throw}
+\subsubsection{Jumping}
+\emph{Jumping} can be done by a player to make the character jump 3 blocks high.
 \subsubsection{Block}
-\subsubsection{Keys and Door}
+A \emph{block} is the simplest item.
+\subsubsection{Throwing}
+\emph{Throwing} can be done by a player to throw items, such as blocks and keys.
+\subsubsection{Key and Door}
+A \emph{key} is another item which can be used to open a door.
 \subsubsection{Chest}
+\emph{Chests} are most distinguished item in Recursed.
 \subsubsection{Green Objects}
 \subsubsection{Water and Acid}
 \subsubsection{Paradox}
 A \emph{paradox} can be happen with green chests.
+Details on how to invoke a paradox is explained in section \ref{s:invoke-paradox}.
 \subsubsection{Jar}
 \subsubsection{Fan}
 \subsubsection{Oobleck}
 \subsubsection{Glitch}
 \subsubsection{Other Items}
+\emph{Rings} are present in Recursed. When a thrown ring hits a wall, it emits sound, which is used in the main Recursed puzzles
+to tell stories. Other than that, it has no function. While there is no use of rings as puzzle elements in the main Recursed puzzles,
+nevertheless rings can be used as puzzle elements.
+
+\emph{Restart crows} appear when a puzzle becomes unsolvable.
 
 \subsection{Tiles}
 \subsubsection{Empty}
 \subsubsection{Solid}
 \subsubsection{Ledge}
 \subsubsection{Water and Acid}
+\subsubsection{Buoy}
 
 \section{Game Mechanisms}
+Like many other puzzle games, Recursed has various patterns in its soluions of puzzles, and it has some uncommon situations
+where the game would handle by doing expected or unexpected actions, where in advanced puzzles a player might have to use them to solve those.
+
+\subsection{Terms}
+Even though game elements are already described in the previous section, when discussing a solution to a puzzle, terms related to rooms can be very confusing.
+So there should be some clarification on those terms.
+
 \subsection{Ways of Invoking a Paradox}
+\label{s:invoke-paradox}
+To invoke a paradox, a player must enter a green chest, find \emph{the} green chest, remove it from the room it originally was in,
+then get out of the green chest.
+For example, assume that a puzzle consists of two of two rooms A and B, and there are chests in each room, a green chest $\beta$ in A leading to B,
+and a chest $\alpha$ in B leading to A. From the room A, a player enters the room B by getting into $\beta$. In the room B, the player
+enters the room A again by getting into $\alpha$. Then, the player gets out of $\alpha$ by holding $\beta$, then put $\beta$ in the room B.
+Then, if the player tries to exit from the room B into the room A, then the player should will be in the position where $\beta$ is in the room A.
+However, since $\beta$ is not in the room A anymore, the game can't find the position where the player should be. Therefore, a paradox appears.
+
+Removing a green chest (a player is currently in) from the room (it originally was in) is an absolute requirement for a paradox to happen.
+However, there are multiple ways to remove a green chest $\alpha$ from the room it originally was in.
+\begin{enumerate}
+\item By moving $\alpha$ to another room\footnote{A jar for the same room $\alpha$ is in does not work. A glitch room does work.}, as shown in the example.
+\item By throwing $\alpha$ to out of the room by dropping it under the bottom edge of the room,
+or throwing it outside of the room\footnote{This currently does not work because of the previously mentioned bug.}.
+\item By unlocking a door which wasn't unlocked in the instance of the room when the player entered $\alpha$,
+then putting $\alpha$ on the door so that the door would obstruct it.
+\item By making a different wet state of the room $\alpha$ is in, then place $\alpha$ in a different place of the room where a buoy would obstruct it.
+\item By converting it into a normal chest by submerging $\alpha$ into acid.
+\end{enumerate}
 
 \section{Complexity of Recursed}
 There haven't much research on algorithms to solve a Recursed map, or how complex such an algorithm would be.
@@ -99,21 +139,21 @@ The \emph{Simple Recursed Decision Problem}, or the \emph{Simple RDP}, is a subs
 \end{definition}
 
 \subsection{Simple RDP $\in$ PSPACE}
-\begin{lemma}
+\begin{conjecture}
 There is a fixed polynomial function $p(n)$, such that in any instance $P$ of the Simple RDP, if there's a solution to $P$,
 then there will be a solution to $P$ such that the maximum number of items in a room in any step of the solution is bounded by $p(n)$,
 where $n$ is the amount of rooms in $P$.
-\end{lemma}
+\end{conjecture}
 
-\begin{lemma}
+\begin{conjecture}
 There is a fixed polynomial function $q(n)$, such that in any instance $P$ of the Simple RDP, if there's a solution to $P$,
 then there will be a solution to $P$ such that the maximum depth achieved in any step of the solution is bounded by $q(n)$,
 where $n$ is the amount of rooms in $P$.
-\end{lemma}
+\end{conjecture}
 
-\begin{theorem}
+\begin{conjecture}
 The Simple RDP is in PSPACE.
-\end{theorem}
+\end{conjecture}
 
 \subsection{Standard RDP $\in$ NP-Hard}
 \begin{theorem}
